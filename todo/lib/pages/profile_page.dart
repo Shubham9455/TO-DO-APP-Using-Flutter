@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:todo/models/apiclient.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+  
+
 import 'home_page.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -42,13 +44,12 @@ class _ProfilePageState extends State<ProfilePage> {
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => HomePage(token: token)));
       }
-      
+
       setState(() {});
-      Future.delayed(const Duration(seconds: 1),(){
-        setState(() {
-          
-        });
-        _loading = false;});
+      Future.delayed(const Duration(seconds: 1), () {
+        setState(() {});
+        _loading = false;
+      });
     }));
 
     debugPrint("token2 = $token");
@@ -75,7 +76,7 @@ class _ProfilePageState extends State<ProfilePage> {
       resizeToAvoidBottomInset: false,
       body: _loading
           ? const Center(
-            child: CircularProgressIndicator(
+              child: CircularProgressIndicator(
               strokeWidth: 10,
             ))
           : SafeArea(
@@ -212,15 +213,29 @@ class _ProfilePageState extends State<ProfilePage> {
                             } else {
                               Response response =
                                   await apiclient.login(uname, password);
-                              token = (response.data)['token'];
-                              debugPrint("token  = $token");
-                              putToken(token);
-                              // ignore: use_build_context_synchronously
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          HomePage(token: token)));
+                              if (response.statusCode == 200) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    duration: Duration(milliseconds: 500),
+                                    backgroundColor: Colors.green,
+                                    content: "Succes".text.make()));
+                                token = (response.data)['token'];
+                                debugPrint("token  = $token");
+                                putToken(token);
+                                // ignore: use_build_context_synchronously
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            HomePage(token: token)));
+                              }
+                              else{
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    duration: Duration(milliseconds: 500),
+                                    backgroundColor: Colors.red,
+                                    content: "Invalid Data".text.make()));
+                              }
                             }
                           },
                         ),

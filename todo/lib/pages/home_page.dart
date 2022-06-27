@@ -208,8 +208,13 @@ class _HomePageState extends State<HomePage> {
                               GestureDetector(
                                 onTap: () {
                                   deleteToken();
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    backgroundColor: Colors.green,
+                                    content: "Logging Out".text.make()));
                                   Navigator.pushReplacement(
                                       context,
+
                                       MaterialPageRoute(
                                           builder: (context) => ProfilePage()));
                                 },
@@ -246,7 +251,7 @@ class TodoTile extends StatefulWidget {
   
   String date = "";
   final String token;
-  double _height = 140;
+  double _height = 155;
   bool tiletapped = false;
   final myController = TextEditingController();
   Color _color = Color.fromRGBO(
@@ -271,7 +276,7 @@ class _TodoTileState extends State<TodoTile> {
     return GestureDetector(
       onTap: (() {
         setState(() {
-          widget._height = (widget._height == 140) ? 170 : 140;
+          widget._height = (widget._height == 155) ? 170 : 155;
           widget._color = Color.fromRGBO(Random().nextInt(256),
               Random().nextInt(256), Random().nextInt(256), 0.5);
           Future.delayed(const Duration(milliseconds: 300), (() {
@@ -375,6 +380,11 @@ class _TodoTileState extends State<TodoTile> {
                                                   widget.token,
                                                   widget.id,
                                                   ("${widget.utitle};${widget.date}"));
+                                                  ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar( 
+                                    duration: Duration(milliseconds: 500),
+                                    backgroundColor: Colors.green,
+                                    content: "Updating Todo".text.make()));
                                               Future.delayed(
                                                   const Duration(
                                                       milliseconds: 500), () {

@@ -79,7 +79,7 @@ class ApiClient {
           },
         ),
       );
-      return response.data;
+      return response;
     } on DioError catch (e) {
       return e.response!;
     }
