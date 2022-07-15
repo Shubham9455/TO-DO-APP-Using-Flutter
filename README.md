@@ -26,7 +26,7 @@ https://pub.dev/packages/velocity_x
 https://pub.dev/packages/shared_preferences
 ##
 
-## [APP LINK](https://github.com/Shubham9455/TO-DO-APP-Using-Flutter/blob/master/app-release.apk)
+## [APP LINK](https://github.com/Shubham9455/TO-DO-APP-Using-Flutter/blob/master/app-debug.apk)
 
 
 ## Made By:
